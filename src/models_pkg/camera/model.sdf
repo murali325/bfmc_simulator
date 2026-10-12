@@ -100,7 +100,10 @@
         </surface>
       </collision>
       <sensor type="camera" name="camera1">
+        <topic>/automobile/image_raw</topic>
         <update_rate>30.0</update_rate>
+        <always_on>1</always_on>
+        <visualize>true</visualize>
         <camera name="head">
           <horizontal_fov>1.085594795</horizontal_fov>
           <image>
@@ -118,22 +121,6 @@
             <stddev>0.0</stddev>
           </noise>
         </camera>
-
-        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-          <alwaysOn>true</alwaysOn>
-          <updateRate>0.0</updateRate>
-          <imageTopicName>image_raw</imageTopicName>
-          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-          <frameName>link_camera</frameName>
-          <hackBaseline>0.0</hackBaseline>
-          <distortionK1>0.0</distortionK1>
-          <distortionK2>0.0</distortionK2>
-          <distortionK3>0.0</distortionK3>
-          <distortionT1>0.0</distortionT1>
-          <distortionT2>0.0</distortionT2>
-	  <robotNamespace></robotNamespace>
-        </plugin>
-
       </sensor>
     </link>
   </model>

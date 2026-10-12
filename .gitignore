@@ -1,6 +1,10 @@
 devel/
 build/
+install/
+log/
 .vscode/
 .catkin_workspace
 src/CMakeLists.txt
 **/*.pyc
+__pycache__/
+*.egg-info/

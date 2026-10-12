@@ -1,74 +1,132 @@
-<?xml version="1.0"?> 
-
+<?xml version="1.0"?>
 <sdf version="1.6">
+  <world name="bfmc_official">
+    <gravity>0.0 0.0 -9.8</gravity>
 
-	<world name="bfmc_official">
-	  	<gravity> 0.0 0.0 -9.8</gravity>
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre</render_engine>
+    </plugin>
+    <plugin
+      filename="gz-sim-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
 
+    <gui fullscreen='0'>
+      <plugin name='3D View' filename='GzScene3D'>
+        <ignition-gui>
+          <title>3D View</title>
+          <property type='bool' key='showTitleBar'>false</property>
+          <property type='string' key='state'>docked</property>
+        </ignition-gui>
+        <engine>ogre</engine>
+        <scene>scene</scene>
+        <ambient_light>0.8 0.8 0.8</ambient_light>
+        <background_color>0.8 0.8 0.8</background_color>
+        <camera_pose>7.34 -7.495 20 0 1.5707 0</camera_pose>
+      </plugin>
+      <plugin name='World control' filename='WorldControl'>
+        <ignition-gui>
+          <title>World control</title>
+          <property type='bool' key='showTitleBar'>false</property>
+          <property type='string' key='state'>docked</property>
+        </ignition-gui>
+        <play_pause>true</play_pause>
+        <step>true</step>
+        <start_paused>false</start_paused>
+      </plugin>
+      <plugin name='World stats' filename='WorldStats'>
+        <ignition-gui>
+          <title>World stats</title>
+          <property type='bool' key='showTitleBar'>false</property>
+          <property type='string' key='state'>docked</property>
+        </ignition-gui>
+        <sim_time>true</sim_time>
+        <real_time>true</real_time>
+        <real_time_factor>true</real_time_factor>
+        <iterations>true</iterations>
+      </plugin>
+    </gui>
 
-		<light type="point" name="c1">
-			<pose> 		0 0 2 0 0 0 	</pose>
-			<diffuse>	125 125 125 125	</diffuse>
-			<specular> 	125 125 125 125	</specular>
-			<attenuation>
-				<range> 	20 		</range>
-				<constant>   0.3 	</constant>
-				<quadratic>  0 		</quadratic>
-				<linear> 	 0 		</linear>
-			</attenuation>
-			<cast_shadows>false</cast_shadows>
-		</light>
+    <light type="point" name="c1">
+      <pose>0 0 2 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1.0</diffuse>
+      <specular>0.2 0.2 0.2 1.0</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.3</constant>
+        <quadratic>0</quadratic>
+        <linear>0</linear>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
 
-		<light type="point" name="c2">
-			<pose> 		15 0 2 0 0 0 	</pose>
-			<diffuse>	125 125 125 125	</diffuse>
-			<specular> 	125 125 125 125	</specular>
-			<attenuation>
-				<range> 	20 		</range>
-				<constant>   0.3 	</constant>
-				<quadratic>  0 		</quadratic>
-				<linear> 	 0 		</linear>
-			</attenuation>
-			<cast_shadows>false</cast_shadows>
-		</light>
+    <light type="point" name="c2">
+      <pose>15 0 2 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1.0</diffuse>
+      <specular>0.2 0.2 0.2 1.0</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.3</constant>
+        <quadratic>0</quadratic>
+        <linear>0</linear>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
 
+    <light type="point" name="c3">
+      <pose>0 -15 2 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1.0</diffuse>
+      <specular>0.2 0.2 0.2 1.0</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.3</constant>
+        <quadratic>0</quadratic>
+        <linear>0</linear>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
 
-		<light type="point" name="c3">
-			<pose> 		0 -15 2 0 0 0 	</pose>
-			<diffuse>	125 125 125 125	</diffuse>
-			<specular> 	125 125 125 125	</specular>
-			<attenuation>
-				<range> 	20 		</range>
-				<constant>   0.3 	</constant>
-				<quadratic>  0 		</quadratic>
-				<linear> 	 0 		</linear>
-			</attenuation>
-			<cast_shadows>false</cast_shadows>
-		</light>
+    <light type="point" name="c4">
+      <pose>15 -15 2 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1.0</diffuse>
+      <specular>0.2 0.2 0.2 1.0</specular>
+      <attenuation>
+        <range>50</range>
+        <constant>0.3</constant>
+        <quadratic>0</quadratic>
+        <linear>0</linear>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
 
+    <include>
+      <uri>model://track</uri>
+      <pose>7.340 -7.495 0 0 0 0</pose>
+    </include>
 
-		<light type="point" name="c4">
-			<pose> 		15 -15 2 0 0 0 	</pose>
-			<diffuse>	125 125 125 125	</diffuse>
-			<specular> 	125 125 125 125	</specular>
-			<attenuation>
-				<range> 	50 		</range>
-				<constant>   0.3 	</constant>
-				<quadratic>  0 		</quadratic>
-				<linear> 	 0 		</linear>
-			</attenuation>
-			<cast_shadows>false</cast_shadows>
-		</light>
+    <include>
+      <uri>model://rcCar_assembly</uri>
+      <name>automobile</name>
+      <pose>0.82 -14.91 0.05 0 0 1.5707963</pose>
+    </include>
 
-
-
-		<include>
-			<scale> 1 1 1 </scale>
-			<uri>model://track</uri>
-			<pose> 7.340 -7.495 </pose>
-	  	</include>
-
-	</world>
-
+  </world>
 </sdf>
-

@@ -3,10 +3,37 @@
 <sdf version='1.6'>
   <world name='bfmc_official'>
     <gravity>0 0 -9.8</gravity>
+
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin
+      filename="ignition-gazebo-physics-system"
+      name="ignition::gazebo::systems::Physics">
+    </plugin>
+    <plugin
+      filename="ignition-gazebo-user-commands-system"
+      name="ignition::gazebo::systems::UserCommands">
+    </plugin>
+    <plugin
+      filename="ignition-gazebo-scene-broadcaster-system"
+      name="ignition::gazebo::systems::SceneBroadcaster">
+    </plugin>
+    <plugin
+      filename="ignition-gazebo-sensors-system"
+      name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre</render_engine>
+    </plugin>
+    <plugin
+      filename="ignition-gazebo-imu-system"
+      name="ignition::gazebo::systems::Imu">
+    </plugin>
+
     <light name='c1' type='point'>
       <pose frame=''>0 0 2 0 -0 0</pose>
-      <diffuse>125 125 125 125</diffuse>
-      <specular>50 50 50 50</specular>
+      <diffuse>0.8 0.8 0.8 1.0</diffuse>
+      <specular>0.2 0.2 0.2 1.0</specular>
       <attenuation>
         <range>20</range>
         <constant>0.3</constant>
@@ -18,8 +45,8 @@
     </light>
     <light name='c2' type='point'>
       <pose frame=''>15 0 2 0 -0 0</pose>
-      <diffuse>125 125 125 125</diffuse>
-      <specular>50 50 50 50</specular>
+      <diffuse>0.8 0.8 0.8 1.0</diffuse>
+      <specular>0.2 0.2 0.2 1.0</specular>
       <attenuation>
         <range>20</range>
         <constant>0.3</constant>
@@ -31,8 +58,8 @@
     </light>
     <light name='c3' type='point'>
       <pose frame=''>0 -15 2 0 -0 0</pose>
-      <diffuse>125 125 125 125</diffuse>
-      <specular>50 50 50 50</specular>
+      <diffuse>0.8 0.8 0.8 1.0</diffuse>
+      <specular>0.2 0.2 0.2 1.0</specular>
       <attenuation>
         <range>20</range>
         <constant>0.3</constant>
@@ -44,8 +71,8 @@
     </light>
     <light name='c4' type='point'>
       <pose frame=''>15 -15 2 0 -0 0</pose>
-      <diffuse>125 125 125 125</diffuse>
-      <specular>50 50 50 50</specular>
+      <diffuse>0.8 0.8 0.8 1.0</diffuse>
+      <specular>0.2 0.2 0.2 1.0</specular>
       <attenuation>
         <range>50</range>
         <constant>0.3</constant>
@@ -84,24 +111,29 @@
           <max_contacts>10</max_contacts>
         </collision>
         <visual name='visual'>
-          <cast_shadows>1</cast_shadows>
-          <transparency>0</transparency>
+          <cast_shadows>0</cast_shadows>
           <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>14.68 14.99</size>
-            </plane>
+            <mesh>
+              <uri>model://track/meshes/track.dae</uri>
+            </mesh>
           </geometry>
           <material>
             <ambient>1 1 1 1</ambient>
             <diffuse>1 1 1 1</diffuse>
-            <specular>0 0 0 0</specular>
-            <emissive>1 1 1 1</emissive>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0.8 0.8 0.8 1</emissive>
             <script>
               <uri>model://track/materials/scripts</uri>
               <uri>model://track/materials/textures</uri>
               <name>BFMC_MATERIAL</name>
             </script>
+            <pbr>
+              <metal>
+                <albedo_map>model://track/materials/textures/track.png</albedo_map>
+                <roughness>0.9</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
           </material>
         </visual>
         <self_collide>0</self_collide>

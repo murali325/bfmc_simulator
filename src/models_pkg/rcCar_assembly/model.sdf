@@ -304,39 +304,36 @@
       </physics>
     </joint>
 
-    <!-- Plugin  -->
-    <plugin name='CarLikeRobotPlugin' filename='libcar_plugin.so'>
-      <wheelbase>0.26</wheelbase>
-      <axletrack>0.162</axletrack>
-      <wheelradius>0.0325</wheelradius>
-      <speed_wheel_joints> 
-        <front_wheel_joints>
-          <leftjoint>joint_leftfront_rim</leftjoint>
-          <rightjoint>joint_rightfront_rim</rightjoint>
-        </front_wheel_joints>
-        <rear_wheel_joints>
-          <leftjoint>joint_leftrear_rim</leftjoint>
-          <rightjoint>joint_rightrear_rim</rightjoint>
-        </rear_wheel_joints>
-        <kp>0.01</kp>
-        <ki>0.0</ki>
-        <kd>0.0</kd>
-      </speed_wheel_joints>
-      <steer_wheel_joints>
-        <leftjoint>joint_leftfront_steer</leftjoint>
-        <rightjoint>joint_rightfront_steer</rightjoint>
-        <kp>10</kp>
-        <ki>0.0</ki>
-        <kd>0.1</kd>
-      </steer_wheel_joints>
-      <initial_steer>0.0</initial_steer>
-      <initial_speed>0.0</initial_speed>
-      <robotNamespace>/</robotNamespace>
+    <!-- Gazebo Sim Plugins -->
+    <plugin
+      filename="gz-sim-ackermann-steering-system"
+      name="gz::sim::systems::AckermannSteering">
+      <left_joint>joint_leftfront_rim</left_joint>
+      <right_joint>joint_rightfront_rim</right_joint>
+      <left_steering_joint>joint_leftfront_steer</left_steering_joint>
+      <right_steering_joint>joint_rightfront_steer</right_steering_joint>
+      <kingpin_width>0.145</kingpin_width>
+      <steering_limit>0.5</steering_limit>
+      <wheel_base>0.26</wheel_base>
+      <wheel_separation>0.162</wheel_separation>
+      <wheel_radius>0.0325</wheel_radius>
+      <topic>/cmd_vel</topic>
     </plugin>
 
-    <plugin name='bno055' filename='libbno055_plugin.so'> </plugin>
-    <plugin name='gps' filename='libgps_plugin.so'> </plugin>
+    <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <topic>/joint_states</topic>
+    </plugin>
 
+    <plugin
+      filename="gz-sim-pose-publisher-system"
+      name="gz::sim::systems::PosePublisher">
+      <publish_link_pose>true</publish_link_pose>
+      <publish_nested_model_pose>true</publish_nested_model_pose>
+      <use_pose_vector_msg>true</use_pose_vector_msg>
+      <static_update_frequency>50</static_update_frequency>
+    </plugin>
 
   </model>
 </sdf>

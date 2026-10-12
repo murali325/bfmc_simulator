@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>BFMC</author>
+      <authoring_tool>BFMC Track Generator</authoring_tool>
+    </contributor>
+    <created>2026-10-11T20:40:00</created>
+    <modified>2026-10-11T20:40:00</modified>
+    <unit name="meter" meter="1.0"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="track_image" name="track_image">
+      <init_from>track.png</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="track_effect">
+      <profile_COMMON>
+        <newparam sid="track_surface">
+          <surface type="2D">
+            <init_from>track_image</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="track_sampler">
+          <sampler2D>
+            <source>track_surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0.2 0.2 0.2 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.8 0.8 0.8 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="track_sampler" texcoord="UVMap"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.1 0.1 0.1 1</color>
+            </specular>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="track_material" name="track_material">
+      <instance_effect url="#track_effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="track_geom" name="track_geom">
+      <mesh>
+        <source id="track_positions">
+          <float_array id="track_positions_array" count="12">
+            -7.340 -7.495 0.0
+             7.340 -7.495 0.0
+             7.340  7.495 0.0
+            -7.340  7.495 0.0
+          </float_array>
+          <technique_common>
+            <accessor source="#track_positions_array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="track_normals">
+          <float_array id="track_normals_array" count="12">
+            0.0 0.0 1.0
+            0.0 0.0 1.0
+            0.0 0.0 1.0
+            0.0 0.0 1.0
+          </float_array>
+          <technique_common>
+            <accessor source="#track_normals_array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="track_uvs">
+          <float_array id="track_uvs_array" count="8">
+            0.0 0.0
+            1.0 0.0
+            1.0 1.0
+            0.0 1.0
+          </float_array>
+          <technique_common>
+            <accessor source="#track_uvs_array" count="4" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="track_vertices">
+          <input semantic="POSITION" source="#track_positions"/>
+        </vertices>
+        <triangles material="track_material_ref" count="2">
+          <input semantic="VERTEX" source="#track_vertices" offset="0"/>
+          <input semantic="NORMAL" source="#track_normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#track_uvs" offset="2" set="0"/>
+          <p>
+            0 0 0   1 1 1   2 2 2
+            0 0 0   2 2 2   3 3 3
+          </p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="track_node" name="track_node" type="NODE">
+        <matrix sid="transform">
+          1 0 0 0
+          0 1 0 0
+          0 0 1 0
+          0 0 0 1
+        </matrix>
+        <instance_geometry url="#track_geom">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="track_material_ref" target="#track_material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

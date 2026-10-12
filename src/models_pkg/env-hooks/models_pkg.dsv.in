@@ -1,0 +1,3 @@
+prepend-non-duplicate;IGN_GAZEBO_RESOURCE_PATH;share/models_pkg/models
+prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;share/models_pkg/models
+prepend-non-duplicate;GAZEBO_MODEL_PATH;share/models_pkg/models
